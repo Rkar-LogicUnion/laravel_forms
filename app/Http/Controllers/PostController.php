@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -39,10 +39,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'title'=>'required|max:10',
+            'body'=>'required'
+        ]);
+
+        $file=$request->file('image');
+        $name=$file->getClientOriginalName();
+        $file->move('images',$name);
+
         Post::create([
             'title'=>$request->title,
             'body'=>$request->body,
-            'category_id'=>$request->category
+            'category_id'=>$request->category,
+            'image'=>$name
         ]);
         return redirect()->route('home');
     }

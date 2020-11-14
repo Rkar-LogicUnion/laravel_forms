@@ -9,11 +9,21 @@
         <div class="col-9">
             @foreach ($posts as $post)    
                 <div class="card mb-2">
+                    <div class="card-header">
+                        {{ $post->created_at->diffForHumans() }}
+                    </div>
                     <div class="card-body">
-                        <blockquote class="blockquote">
-                            <p class="mb-0">{{ $post->title }}</p>
-                            <footer class="blockquote-footer">{{ $post->category->name }}</footer>
-                        </blockquote>
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="{{ $post->image }}" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-8">
+                                <blockquote class="blockquote">
+                                    <p class="mb-0">{{ $post->title }}</p>
+                                    <footer class="blockquote-footer">{{ $post->category->name }}</footer>
+                                </blockquote>
+                            </div>
+                        </div> 
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('post.show',$post->id) }}" class="btn btn-success">Read More</a>

@@ -11,8 +11,8 @@ use App\Post;
 class HomeController extends Controller
 {
     public function index(){
-        $categories=Category::orderBy('id','desc')->get();
-        $posts=Post::orderBy('id','desc')->get();
+        $categories=Category::latest();
+        $posts=Post::latest();
         return view('home',compact('categories','posts'));
     }
 }
